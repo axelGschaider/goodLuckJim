@@ -12,28 +12,41 @@ import Import
 -- inclined, or create a single monolithic file.
 getHomeR :: Handler Html
 getHomeR = do
-    (formWidget, formEnctype) <- generateFormPost sampleForm
-    let submission = Nothing :: Maybe (FileInfo, Text)
-        handlerName = "getHomeR" :: Text
+    (formWidget, formEnctype) <- generateFormPost secretForm
     defaultLayout $ do
         aDomId <- newIdent
-        setTitle "Welcome To Yesod!"
+        setTitle "Ei äm se pätsch häda!"
         $(widgetFile "homepage")
+    --(formWidget, formEnctype) <- generateFormPost sampleForm
+    --let submission = Nothing :: Maybe (FileInfo, Text)
+    --    handlerName = "getHomeR" :: Text
+    --defaultLayout $ do
+    --    aDomId <- newIdent
+    --    setTitle "Welcome To Yesod!"
+    --    $(widgetFile "homepage")
 
 postHomeR :: Handler Html
 postHomeR = do
-    ((result, formWidget), formEnctype) <- runFormPost sampleForm
-    let handlerName = "postHomeR" :: Text
-        submission = case result of
-            FormSuccess res -> Just res
-            _ -> Nothing
-
+    ((result, formWidget), formEnctype) <- runFormPost secretForm
     defaultLayout $ do
         aDomId <- newIdent
-        setTitle "Welcome To Yesod!"
+        setTitle "changed"
         $(widgetFile "homepage")
+    --((result, formWidget), formEnctype) <- runFormPost sampleForm
+    --let handlerName = "postHomeR" :: Text
+    --    submission = case result of
+    --        FormSuccess res -> Just res
+    --        _ -> Nothing
 
-sampleForm :: Form (FileInfo, Text)
-sampleForm = renderDivs $ (,)
-    <$> fileAFormReq "Choose a file"
-    <*> areq textField "What's on the file?" Nothing
+    --defaultLayout $ do
+    --    aDomId <- newIdent
+    --    setTitle "Welcome To Yesod!"
+    --    $(widgetFile "homepage")
+
+secretForm :: Form Text
+secretForm = renderDivs $ areq textField "The Message" Nothing
+
+--sampleForm :: Form (FileInfo, Text)
+--sampleForm = renderDivs $ (,)
+--    <$> fileAFormReq "Choose a file"
+--    <*> areq textField "What's on the file?" Nothing
