@@ -2,8 +2,8 @@
 
 _{MsgThisIsHowItWorks}
 
- <form method=post action=@{HomeR}#form enctype=#{formEnctype}>
-      ^{formWidget}
-      <input type="submit" value="Send it!">
+<form method=post action=@{HomeR}#form enctype=#{formEnctype}>
+  ^{formWidget}
+  <input type="submit" value="Send it!">
 
 
